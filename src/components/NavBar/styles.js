@@ -1,22 +1,29 @@
-import { makeStyles } from "@mui/styles";
 
-const useStyles = makeStyles({
-  navBar: {
-    gap: { sm: "122px", xs: "40px" },
-    mt: { sm: "32px", xs: "20px" },
+const styles = {
+  navbar: {
+    display: {
+      xs: "block",
+      sm: "flex",
+    },
   },
-  logo: {
-    width: 45,
-    height: 45,
-    margin: "10px 20px 0",
-  },
-  link: {
+  navbarLink: {
     textDecoration: "none",
-    color: "#3A1212",
+    padding: "15px",
   },
-  current: {
-    borderBottom: '3px solid #FF2625'
-  }
-});
+  navbarLinkText: {
+    color: "#fff",
+    fontSize: {
+      lg: "34px",
+    },
+    fontWeight: "bold",
+  },
+  navbarLinkActiveText: {
+    color: "red",
+    fontSize: {
+      lg: "34px",
+    },
+    fontWeight: "bold",
+  },
+};
 
-export default useStyles;
+export default styles;

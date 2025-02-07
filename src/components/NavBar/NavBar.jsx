@@ -1,36 +1,42 @@
-import { Link } from "react-router-dom";
-import { Stack } from "@mui/material";
+import { Link, useLocation } from "react-router-dom";
+import { Box, Typography } from "@mui/material";
 
+import { useStore } from "../../store/store";
 
-import logo from "../../assets/images/logo.png";
+import styles from "./styles";
 
-import useStyles from "./styles";
-
-const NavBar = () => {
-  const classes = useStyles();
+const Navbar = () => {
+  const location = useLocation();
+  const id = useStore((state) => state.selectedExerciseId);
 
   return (
-    <Stack
-    direction="row"
-      className={classes.navBar}
-    >
-      <Link to="/">
-        <img
-          src={logo}
-          alt="logo"
-          className={classes.logo}
-        />
+    <Box sx={styles.navbar}>
+      <Link to="/" style={styles.navbarLink}>
+        <Typography
+          sx={
+            location.pathname === "/"
+              ? styles.navbarLinkActiveText
+              : styles.navbarLinkText
+          }
+        >
+          Search Exercises
+        </Typography>
       </Link>
-      <Stack direction="row" gap="40px" fontSize="24px" alignItems="flex-end">
-        <Link to="/" className={classes.link + ' ' + classes.current}>
-          Home
+      {id && (
+        <Link to={`/exercise/${id}`} style={styles.navbarLink}>
+          <Typography
+            sx={
+              location.pathname === `/exercise/${id}`
+                ? styles.navbarLinkActiveText
+                : styles.navbarLinkText
+            }
+          >
+            Exercise Details
+          </Typography>
         </Link>
-        <Link to="/exercises" className={classes.link}>
-          Exercises
-        </Link>
-      </Stack>
-    </Stack>
+      )}
+    </Box>
   );
 };
 
-export default NavBar;
+export default Navbar;
