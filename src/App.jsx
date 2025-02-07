@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Box } from "@mui/material";
 
@@ -13,6 +13,7 @@ import "./App.css";
 const queryClient = new QueryClient();
 
 const App = () => {
+  
   return (
     <QueryClientProvider client={queryClient}>
       <Header />
@@ -20,6 +21,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/exercise/:id" element={<ExerciseDetail />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Box>
       <Footer />
