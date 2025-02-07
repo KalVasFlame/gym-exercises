@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Pagination } from "@mui/material";
 
 import ExerciseCard from "../ExerciseCard/ExerciseCard";
 
 import styles from "./styles";
 
-const ExercesesList = ({ isPending, exercisesList }) => {
+const ExercesesList = ({ isPending, exercisesList, resetPagination }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(6);
 
@@ -17,6 +17,10 @@ const ExercesesList = ({ isPending, exercisesList }) => {
   const indexOfFirstExercise = indexOfLastExercise - perPage;
 
   //Pagination
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [resetPagination]);
 
   if (isPending) return <Box>Loading...</Box>;
 

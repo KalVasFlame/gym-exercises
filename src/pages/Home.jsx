@@ -15,12 +15,17 @@ const Home = () => {
   const bodyType = useStore((state) => state.bodyType);
   const target = useStore((state) => state.target);
   const equipment = useStore((state) => state.equipment);
+  const [PaginationReset, setPaginationReset] = useState(false);
 
   const [exercisesList, setExercisesList] = useState([]);
   const { data, isPending } = useQuery({
     queryKey: ["exercises"],
     queryFn: getExercisesList,
   });
+
+  useEffect(() => {
+    setPaginationReset(prev => !prev);
+  }, [search, bodyType, target, equipment]);
 
   useEffect(() => {
     setExercisesList(data);
@@ -62,7 +67,11 @@ const Home = () => {
       <Hero />
       <BodyTypesList />
       <Search />
-      <ExercesesList isPending={isPending} exercisesList={exercisesList} />
+      <ExercesesList
+        isPending={isPending}
+        exercisesList={exercisesList}
+        resetPagination={PaginationReset}
+      />
     </Box>
   );
 };
