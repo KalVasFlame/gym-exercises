@@ -21,8 +21,8 @@ const ExerciseDetail = () => {
   });
 
   const { data: videos } = useQuery({
-    queryKey: ["videos"],
-    queryFn: () => getYoutubeVideos({ query: exercise.name }),
+    queryKey: ["videos", exercise?.name],
+    queryFn: () => getYoutubeVideos({ query: exercise?.name }),
   });
 
   const { data: exercises, isPending: isPendingExercises } = useQuery({
